@@ -9,19 +9,27 @@ const ListCharacters = () => {
         .then(response => {
             return response.json()
         }).then(response => {
-            setCharacters(response.results)        
+            setCharacters(response.results)    
         })
     }, [])
 
     return (
-        <div className="row">
-            <h3>Listado de Personajes</h3>
-            {
-                characters && characters.map((character)=>{
-                    return <Character image={character.image} name={character.name}/>
+        <div className="container">
+            <h3>Characters</h3>
+            <div className="container horizontal-scrollable">
+                <div className="row flex-row flex-nowrap overflow-auto" id="Character">
+                {
+                characters && characters.map((character, index)=>{
+                    return <Character 
+                    name={character.name}
+                    key={character.uid}
+                    uid={character.uid}
+                    index={index}                 />
                 })
-            }
-            <div className="col-12 col-md-4">Personaje 1</div>
+                }
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3"></div>
+                </div>
+            </div>
         </div>
     )
 }

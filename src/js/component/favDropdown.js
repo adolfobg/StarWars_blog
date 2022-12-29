@@ -1,58 +1,33 @@
-import React, {useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { Context } from "../store/appContext";
 
 const FavDropdown= () => {
-  const [inputValue, setInputValue] = useState("");
-  const [favorites, setFavorites] = useState([]);
-  const change1 = (e) => {
-    setInputValue(e.target.value);
-  };
- const deleteItem = (index) => {
- return setFavorites(
-    favorites.filter((item, i) => {
-     return i !== index;
-    })
-   );
-  };
+  const {store, actions} = useContext(Context)
 
   return (
     <div className="dropdown">
-      <form class="form" onSubmit={(e) => e.preventDefault()}>
-        <input
-          className="text-black task-input"
-          type="text"
-          value={inputValue}
-          onChange={change1}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setFavorites([...favorites, inputValue]);
-              setInputValue("");
-            }
-          }}
-          placeholder="Favorites"
-        ></input>
-      </form>
-      {
-        <div className="list">
-          <div className="">
-            <ul class="list-group list-group-flush">
-              {favorites.map((itemvalue, index) => {
-              return (
-                <div>
-                <li className="text-black" id={index}>{itemvalue}
-                  <button className="btn" >
-                  <i className="far fa-trash-alt" onClick={() => deleteItem(index)}/>
-                  </button>
-                </li>
-                </div>
-                );
-              })}
-            </ul>
-          </div>
-         
-        </div>
-      }
+      <button className="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        Favoritos
+      </button>
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        {
+        !store.favorites ? (
+          <li>no hay favoritos</li>
+        ) : ("")
+        }
+        {
+          store.favorites.map((fav, i)=>(
+            <li>{fav}
+            <button className="btn" >
+                  <i className="far fa-trash-alt" onClick={() => deleteFavourites(nombre)}/>
+            </button>
+            </li>
+          ))
+        }
+        </ul>
     </div>
-  );
-};
+    );
+  };
+
 
 export default FavDropdown;

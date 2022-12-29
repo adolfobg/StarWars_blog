@@ -9,3 +9,11 @@
     color: rgb(192, 58, 58);
     list-style:none
 }
+h3{
+    color: rgb(192, 58, 58);
+    padding: 30px;
+    text-align: left;
+}
+#Character{
+    text-align: left;
+}

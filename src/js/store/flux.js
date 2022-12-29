@@ -1,44 +1,42 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			Characters: [],
-			Planets: [],
+			characters: [],
+			planets: [],
+			favorites: []
 			},
 		actions: {
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
-			loadSomeData: () => {
-				
-					fetch('http https://swapi.dev/api/people')
-					.then((people) => {
-						return people.json()
-					}).then((people) => {
-						setStore.Characters(people.results)
-					})
-
-					fetch('http https://swapi.dev/api/planets')
-					.then((planets) => {
-						return planets.json()
-					}).then((planets) => {
-						setStore.Planets(planets.results)
-					})
+			loadCharacters: () => {
+				fetch('http https://swapi.dev/api/people',{
+					method: "GET",
+					headers: {"Content-Type":"application/json"}
+				})
+					.then((response) => response.json())
+					.then((response) => setStore({characters:response.results}))
+					.catch((err)=>console.error(err))
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+			loadPlanets: () => {
+				fetch('http https://swapi.dev/api/planets', {
+					method: "GET",
+					headers: {"Content-Type":"application/json"}
+				})
+				.then((response) => response.json())
+				.then((response) => setStore({planets:response.results}))
+				.catch((err)=>console.error(err))
+			},
+			addFavourites: (nombre) => {
+				const store = getStore()
+				setStore({favorites:[...store.favorites, nombre]})
+			},
+			deleteFavourites: (nombre) => {
+				const store = getStore()
+				store.favorites=store.favorites.filter((obj)=>nombre != obj)
+			},
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
 		}
 	};
 };

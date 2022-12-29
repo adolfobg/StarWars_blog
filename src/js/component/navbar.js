@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import FavDropdown from "./favDropdown";
 
@@ -6,7 +6,7 @@ export const Navbar = () => {
 	return (
 		<nav className="navbar navbar bg mb-3">
 			<div className="container">
-				<Link to="/home.js">
+				<Link to="/">
 				<span className="navbar-brand mb-0 h1">
 					{" "}
 					<img
@@ -18,7 +18,7 @@ export const Navbar = () => {
 				</Link>
 				<div className="ml-auto">
 				<Link to="/">
-				<div class="dropdown">
+				<div className="dropdown">
 					<FavDropdown/>
 					</div>
 				</Link>

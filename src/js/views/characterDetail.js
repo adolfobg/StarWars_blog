@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
-import imagen from "../../img/800x600.png";
 
 const CharacterDetail = () => {
     const params = useParams()
@@ -20,11 +19,7 @@ const CharacterDetail = () => {
             <div className="container">
                 <div className="row justify-content-evenly">
                     <div className="col-6">
-                    <img src={imagen} class="img-thumbnail" alt="..."/>
-                    </div>
-                    <div className="col-6">
-                    <h1 className="text-center">Luke Skywalker</h1>
-                    <p className="lead text-center fs-3"><strong>Sed ut erspiciatis unde omnis iste natus error sit voluptatem accusantium dolloremque laudantium, totam rem aperiam, eaque ipsa queae ab illo, inventore veritatis et quasi architecto beatae vitae dicta sun explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.</strong></p>
+                    <img src={`https://starwars-visualguide.com/assets/img/characters/${params.id}.jpg`} className="img-thumbnail" alt="..."/>
                     </div>
                 </div>
             </div>

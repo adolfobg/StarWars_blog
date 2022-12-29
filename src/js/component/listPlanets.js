@@ -4,24 +4,33 @@ import Planet from "./planet";
 const ListPlanets = () => {
     const [planets, setPlanets] = useState([])
     
+    
     useEffect (()=> {
         fetch("https://www.swapi.tech/api/planets/")
         .then(response => {
             return response.json()
         }).then(response => {
-            setPlanets(response)        
+            setPlanets(response.results)        
         })
     }, [])
 
     return (
-        <div className="row">
-            <h3>Listado de Planetas</h3>
-            {
-                planets.map((planet)=>{
-                    return <Character image={planet.image} name={planet.name}/>
+        <div className="container testimonial-group">
+            <h3>Planets</h3>
+            <div className="container horizontal-scrollable">
+                <div className="row flex-row flex-nowrap overflow-auto" id="Character">
+                {
+                planets && planets.map((planet)=>{
+                    return <Planet
+                    name={planet.name}
+                    key={planet.uid}
+                    uid={planet.uid}
+                    />
                 })
-            }
-            <div className="col-12 col-md-4">Planeta 1</div>
+                }
+                    <div className="col-12 col-sm-6 col-md-4 col-lg-3"></div>
+                </div>
+            </div>
         </div>
     )
 }
